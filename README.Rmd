@@ -21,6 +21,7 @@ The `sValues` package implements the measures of the sturdiness of regression co
 To install the GitHub version you need to have the package `devtools` installed. Make sure to set the option `build_vignettes = TRUE` to compile the package vignette.
 
 ```{r, eval = FALSE}
+# install.packages("devtools") # run this to install the devtools package
 devtools::install_github("carloscinelli/sValues", build_vignettes = TRUE)
 ```
 
