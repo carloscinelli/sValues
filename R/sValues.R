@@ -36,7 +36,7 @@ g_s_values <- function(x, R2_bounds){
 ##' S-values: conventional model ambiguity measures
 ##' 
 ##' @description 
-##' The function \code{sValues} performs the extreme bound analysis proposed by Leamer (2014a) and 
+##' The function \code{sValues} performs the extreme bound analysis proposed by Leamer (2014) and 
 ##' discussed in Leamer (2015). 
 ##' For further details see the package vignette. 
 ##'
@@ -104,7 +104,7 @@ g_s_values <- function(x, R2_bounds){
 ##' 
 ##' @references
 ##'  
-##' Leamer, E. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
+##' Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
 ##' 
 ##' Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 ##' 

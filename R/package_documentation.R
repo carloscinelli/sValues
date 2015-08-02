@@ -15,7 +15,7 @@
 ##'The package also includes an example dataset on economic growth.
 ##' @references
 ##'  
-##' Leamer, E. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
+##' Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
 ##' 
 ##' Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 ##' 
