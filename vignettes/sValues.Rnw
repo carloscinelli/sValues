@@ -1,0 +1,185 @@
+%\VignetteIndexEntry{Brief Introduction to the sValues Package}
+\documentclass{article}
+
+\title{Model Ambiguity in \texttt{R}: The \texttt{sValues} Package} 
+
+\author{Carlos Cinelli \thanks{This vignette is a draft based on a poster presented on useR! 2015. I've learned a great deal from discussions with Ed Leamer! I also thank Rasmus Baath, Danilo Freire and Douglas Araujo for their comments. Of course, all remaining errors are my own. And all opinions expressed in this material are mine and do not necessarily reflect the views of UnB or CBB. 
+Contact: carloscinelli@hotmail.com}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	INTRO
+%----------------------------------------------------------------------------------------
+
+
+\section{The problem: \emph{ad-hoc} specification searches}
+
+<<include=FALSE, echo=FALSE>>=
+library(knitr)
+render_sweave()
+# hook2 <- function(x){ gsub("```\n+```\n", "", x) }
+# knit_hooks$set(document = hook2)
+opts_chunk$set(size="small", comment = "")
+@
+
+A researcher is studying economic growth and is specifically interested in the role of Government (Nominal) GDP Share. After trying some preliminary models, he comes up with a ``good'', ``parsimonious'' specification with 10 control variables. The coefficient is negative, ``significant'' and it even resists some ``robustness'' checks. How reliable is this finding? Actually, not much. But this practice is quite common. 
+
+Researchers usually engage in \emph{ad-hoc} specification searches but present only their favorite models. This, however, can easily underestimate the uncertainty caused by model selection and lead to overconfident inferences. Since we are dealing with nonexperimental data, the set of controls can be virtually unlimited and the theory ambiguous about which ones do matter. In this example, it turns out that one can come up with a different set of 10 controls in which the coefficient for Government GDP Share is positive and ``significant''. In fact, there are 67 possible control variables, which could generate 148 \emph{quintillion} different models!
+
+So how can we tackle that problem? This presentation will introduce the \texttt{R} package \texttt{sValues}, which implements a measure of sturdiness of coefficients proposed by Leamer\cite{Leamer2014} and discussed in Leamer\cite{Leamer2015}. The S-values try to provide a sensible framework to assess the sensitivity of coefficient estimates to model ambiguity. But before going to the \texttt{R} implementation, let's see a \emph{brief} description of the method.
+
+
+%----------------------------------------------------------------------------------------
+%	S-VALUES: THEORY
+%----------------------------------------------------------------------------------------
+
+\section{S-Values: measures of the sturdiness of regression coefficients}
+\subsection{Extreme bounds for the coefficients}
+
+The different estimates for Government GDP Share can be interpreted as the result of \emph{different strong prior beliefs}: the coefficients of the \emph{ommited} variables are \emph{exactly zero}, whereas, for the ones \emph{included} in the model, \emph{we believe whatever the data says}. This suggests that a Bayesian approach could be useful to model this problem. Consider the linear model $y = X\beta + \epsilon$ where $\epsilon \sim N(0, \sigma^2 I)$ and $\beta \sim N(0, V)$. The OLS estimate of $\beta$ is $b = (X'X)^{-1}X'y$ with precision matrix $H =(X'X)/\sigma^{2}$. Then, the posterior mean of $\beta$ is: 
+
+\begin{equation}
+\hat{\beta}(V) = (H + V^{-1})^{-1}Hb
+\label{beta}
+\end{equation}
+
+Notice that within this framework we can express model specifications in terms of \emph{beliefs about the prior variance} $V$. For example, regressions with subsets of explanatory variables are akin to saying that the diagonal of $V$ is really really large (infinite) for some of them and really really small (zero) for others. If we knew $V$ exactly (or had a distribution for $V$), then we would just have an estimation problem. But, if $V$ is ambiguous or disputable, then we might want to know how sensitive $\hat{\beta}$ is to ``sensible'' variations in the prior variance. 
+
+To come up with a set for possible $Vs$, we might want to bound it from below, excluding dogmatic priors of zero variances which would lead to inferences unaffected by data. We might also want to bound it from above, preventing the data to speak freely and limiting the influence of unimportant variables. So, given that $V$ is bounded from above and from below, $V_* \leq V \leq V^*$, Leamer\cite{Leamer1982} shows that $\hat{\beta}$ lies in the ellipsoid:
+
+
+\begin{equation}
+(\hat{\beta} - f)G(\hat{\beta} - f) \leq c
+\label{ellipsoid}
+\end{equation}
+
+Where: 
+$$G = (H + {V^*}^{-1}) (V_*^{-1} - {V^*}^{-1})^{-1} (H + {V^*}^{-1}) +  (H + {V^*}^{-1})$$ 
+$$f = (H + V_*^{-1})^{-1}[Hb + (V_*^{-1} - {V^*}^{-1}) (H + {V^*}^{-1})^{-1} Hb/2 ]$$ 
+$$c = b'H(H + {V^*}^{-1})^{-1}(V_*^{-1} - {V^*}^{-1}) (H + {V^*}^{-1})^{-1} Hb/4$$
+
+Therefore the extreme bounds for a linear combination $\psi'\hat{\beta}(V)$ are given by:
+
+\begin{equation}
+\psi f \pm (\psi'G^{-1}\psi)^{\frac{1}{2}}c^{\frac{1}{2}}
+\label{extbounds}
+\end{equation}
+
+And our measure of the sturdiness of a coefficient, the S-value, can be defined as:
+
+\begin{equation}
+s = \frac{\psi f}{(\psi'G^{-1}\psi)^{\frac{1}{2}}c^{\frac{1}{2}}}
+\label{svalue}
+\end{equation}
+
+When the S-value is less than 1 in absolute value this means that the coefficient is not \emph{sturdy} - that is, it changes sign when $V$ varies within the upper and lower bounds. Figure \ref{fig:elipses} illustrates these ideas.
+
+\begin{figure}
+\includegraphics{ellipses.jpg}
+\caption{Ellipses of estimates. Source: Leamer\cite{Leamer2014}}
+\label{fig:elipses}
+\end{figure}
+
+\subsection{Conventional bounds for the prior variances}
+
+The problem now is how to find specific numerical bounds for $V$. Choosing bounds for the variances of the coefficients can be a challenging task. So, instead, Leamer\cite{Leamer2014} suggests that we focus on the expected $R^2$ of the model (which, probably, most people would find easier). After standardizing the variables and considering bounds proportional to the identity matrix, the prior variance $v^2$ of each beta-coefficient equals to the expected $R^2$ divided by the number of parameters $k$ of the model, that is, $v^2 = E(R^2)/k$. 
+
+This would give us the bounds:
+
+\begin{equation}
+v^2_{low} = \frac{E(R^2)_{low}}{k} \leq v^2 \leq \frac{E(R^2)_{up}}{k} = v^2_{up}
+\end{equation}
+
+As for the ranges of expected $R^2$, Leamer\cite{Leamer2014} proposes three choices: (i) a context-minimal range $[0.1, 1.0]$; (ii) a pessimistic range $[0.1, 0.5]$; and, (iii) an optimistic range $[0.5,1.0]$. We can generalize this to allow sets of ``favorite'' variables. Note that whereas the bounds of $V$ are diagonal, we are allowing non-diagonal priors.
+
+%----------------------------------------------------------------------------------------
+%	THE R PACKAGE
+%----------------------------------------------------------------------------------------
+
+\section{The \texttt{sValues} \texttt{R} package: A Growth Regressions Example}
+
+The \texttt{sValues} package comes with an example dataset on economic growth used by various papers (FSL\cite{fls2001}, SDM\cite{SDM2004} and Leamer\cite{Leamer2014}). This dataset comprises the growth of real GDP per capita from 1960 to 1996 and other 67 explanatory variables from 87 countries. 
+
+The main function of the package is the \texttt{sValues} function. The standard approach is to provide a \texttt{formula} specifying the model, a \texttt{data.frame} with the data and a numerical vector with the $R^2$ bounds (default values are $0.1$, $0.5$, and $1$). As a shortcut, you can omit the formula and the function will automatically consider the first column as the dependent variable and the rest as the independent variables. Let's run the analysis for the economic growth data.
+
+<<size='small'>>=
+library(sValues) # loads package
+data("economic_growth") # loads data
+eg <- sValues(economic_growth) # runs analysis
+eg # prints basic results
+@
+
+As we can see from the results, only in the ``optimistic'' scenario some variables are robust to model ambiguity. Moreover, if we look at the sample uncertainty (t-values), there is only one variable (\texttt{IPRICE1}) which has both $|s| > 1$ and $|t| > 2$. This means that any precise inferences about the sign of almost all the coefficients \emph{require stronger prior information about preference for some variables}. It is worth mentioning that these results are in contrast with those obtained by using the BMA methodologies proposed by FSL\cite{fls2001} and SDM\cite{SDM2004}, which can also be implemented in \texttt{R} using the \texttt{BMS} package (see Zeugner\cite{Zeugner2011}). 
+
+
+You can access specific coefficient values with the \texttt{coef} function setting the argument \texttt{type} to the desired statistic (for example, \texttt{type = "s\_values"}, \texttt{type = "t\_values"} or \texttt{type = "extreme\_bounds"}). For each type, there is also a wrapper function with the same name, so the command \texttt{coef(x, type = "s\_values")} is equivalent to \texttt{s\_values(x)}.
+
+<<>>=
+# gets a complete table like in Leamer[3] 
+full_table <- coef(eg) 
+full_table[1:5, 1:5] # showing only first five columns and rows
+
+# gets just the s_values 
+just_svalues <- coef(eg, type = "s_values")
+just_svalues[1:5, ] # showing only first five rows
+
+# print(eg, coef = "extreme_bounds", 
+#       type = "latex", variables = c("GOVNOM1", "IPRICE1"))
+@
+
+Let's print the extreme bounds in the optimistic case of two specific coefficients: \texttt{GOVNOM1} and \texttt{IPRICE1}.
+
+<<>>=
+extreme_bounds(eg)[c("GOVNOM1", "IPRICE1"),
+                   c("R2_0.5_1.low", "R2_0.5_1.up")]
+@
+
+As we had seen, \texttt{IPRICE1} is robust to different prior variances, with extreme bounds of $-0.22$ and $-0.07$. On the other hand, \texttt{GOVNOM1} may change its sign with different specifications varying from $-0.16$ to $0.03$.
+
+The package comes with some plot methods to explore the results. Let's plot the t-statistics versus the s-values per coefficient, highlighting the uncertain and fragile estimates, as shown in Figure \ref{fig:t_s_plot}. 
+
+<<t_s_plot, size='small', fig.align='center', fig.lp="fig:", fig.cap = 't-statistics vs s-values'>>=
+plot(eg, type = "t_s_plot", R2_bounds = c(0.5, 1))
+@
+
+Also, let's investigate how the coefficient for Government GDP Share varies with different prior $R^2$ as shown in Figure \ref{fig:beta_plot} (the Bayesian estimates consider a diagonal $V$ with the corresponding $v^2$ specified before and can be thought of weighted averages of the $2^k$ regressions \cite{Leamer2014}).
+
+<<beta_plot, size='small', fig.align='center', fig.lp="fig:", fig.cap = 'Bayesian estimates for GOVNOM1'>>=
+plot(eg, type = "beta_plot", variables = "GOVNOM1")
+@
+
+The \texttt{sValues} function allows you to define some of the variables as ``favorites'' with larger prior variances. In that case, you need to specify a \texttt{favorites} paramater - with the names of the favorite variables - and a \texttt{R2\_favorites} parameter with the $R^2$ bounds for the favorite variables. For example, the code below reproduces the favorite variables chosen in Leamer\cite{Leamer2014}:
+
+<<size = 'small'>>=
+favorites <- c("GDPCH60L", "OTHFRAC", "ABSLATIT", 
+               "LT100CR", "BRIT", "GOVNOM1", 
+               "WARTIME", "SCOUT","P60", "PRIEXP70", 
+               "OIL", "H60", "POP1560", "POP6560")
+eg_fav <- sValues(economic_growth, R2_bounds = c(0.5, 1),
+                  favorites = favorites, R2_favorites = c(0.4, 0.8))
+eg_fav
+@
+
+%----------------------------------------------------------------------------------------
+%	FINAL CONSIDERATIONS
+%----------------------------------------------------------------------------------------
+
+\section*{Further developments}
+We need more tools that help us study the sensitivity of our inferences and help us communicate it effectively. The idea of the \texttt{sValues} package is to bring one of these tools to the \texttt{R} community, with functions that (hopefully) make some of these tasks easier. This is still a work in progress though, and there is a lot that can be improved: what kind of tables, summaries or visualizations do you think would be most helpful both for exploring and for reporting the results? In what directions should the method be extended? For comments or suggestions, feel free to contact me or to make pull requests on github.
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\bibliographystyle{acm}
+\bibliography{references} 
+
+\end{document}

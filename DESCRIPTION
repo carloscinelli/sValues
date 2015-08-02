@@ -1,0 +1,13 @@
+Package: sValues
+Type: Package
+Title: sValues: measures of the sturdiness of regression coefficients
+Version: 0.1
+Date: 2015-08-02
+Author: Carlos Cinelli
+Maintainer: Carlos Cinelli <carloscinelli@hotmail.com>
+Description: The sValues package implements the s-values proposed by Ed. Leamer.
+Imports: caTools, ggplot2, reshape2
+License: GPL-3
+Suggests: knitr
+VignetteBuilder: knitr
+LazyData: true
