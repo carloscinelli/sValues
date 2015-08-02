@@ -7,6 +7,7 @@ How to install the development version from GitHub
 To install the GitHub version you need to have the package `devtools` installed. Make sure to set the option `build_vignettes = TRUE` to compile the package vignette.
 
 ``` r
+# install.packages("devtools") # run this to install the devtools package
 devtools::install_github("carloscinelli/sValues", build_vignettes = TRUE)
 ```
 
