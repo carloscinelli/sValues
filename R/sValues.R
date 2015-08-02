@@ -104,9 +104,9 @@ g_s_values <- function(x, R2_bounds){
 ##' 
 ##' @references
 ##'  
-##' Leamer, Ed. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
+##' Leamer, E. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
 ##' 
-##' Leamer, Ed. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
+##' Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 ##' 
 ##' @export
 ### sValues ###
