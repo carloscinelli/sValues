@@ -1,8 +1,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in [1] and [2].
 
-How to install the development version from GitHhub
----------------------------------------------------
+How to install the development version from GitHub
+--------------------------------------------------
 
 To install the GitHub version you need to have the package `devtools` installed. Make sure to set the option `build_vignettes = TRUE` to compile the package vignette.
 
@@ -54,6 +54,6 @@ More information can be found on the help documentation, examples and package vi
 References
 ----------
 
-[1] Leamer, E. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
+[1] Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
 
 [2] Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
