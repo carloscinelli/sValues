@@ -1,6 +1,7 @@
 ##### Internal Functions  - Not for user interaction #####
 
-# S3 scale method for formula
+# scale data
+##' @importFrom stats model.matrix
 model_matrix_scale <- function(formula, data, scale = TRUE){
   x <- model.matrix(formula, data)[ ,-1, drop = FALSE]
   if(scale) x  <- scale(x)
@@ -48,6 +49,7 @@ r2_combs <- function(R2_bounds){
 
 
 # Calculates the bayesian estimates given a prior R2
+##' @importFrom stats vcov
 .bayes <- function(ols, prior_R2, favorites = NULL, R2_favorites = NULL){
   
   if(class(ols)!= "lm") stop("ols must be an object of class 'lm'")
@@ -85,6 +87,7 @@ r2_combs <- function(R2_bounds){
 
 
 # Extreme bounds given R2 bounds
+##' @importFrom stats vcov
 .bounds <- function(ols, coef_indices, R2_bounds, favorites = NULL, R2_favorites = NULL){
   
   #-- linear combination --#

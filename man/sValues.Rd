@@ -48,18 +48,18 @@ formula, the data, the bounds and favorite variables.
 
 \item \code{simple}: a \code{list} with the results of the simple linear regressions for each variable.
 
-\item \code{all}: the results of the linear regregssion with all variables.
+\item \code{all}: the results of the linear regression with all variables.
 
 \item \code{bayes}: a \code{list} with the results of the bayesian regression for each combination of the R2 bounds.
 Each bayesian regression includes the coefficient estimates, the variance-covariance matrix and the t-values.
 
-\item \code{ext_bounds} a \code{list} with the extreme bounds estimates for each combination of the R2 bounds.
+\item \code{ext_bounds}: a \code{list} with the extreme bounds estimates for each combination of the R2 bounds.
 
-\item \code{s_values} a \code{data.frame} with the s_values for each combination of the R2 bounds.
+\item \code{s_values}: a \code{data.frame} with the s_values for each combination of the R2 bounds.
 }
 }
 \description{
-The function \code{sValues} performs the extreme bound analysis proposed by Leamer (2014a) and
+The function \code{sValues} performs the extreme bound analysis proposed by Leamer (2014) and
 discussed in Leamer (2015).
 For further details see the package vignette.
 }
@@ -96,9 +96,9 @@ coefs_eg_fav <- coef(eg_sv_fav)
 coefs_eg_fav
 }
 \references{
-Leamer, Ed. (2014a). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
+Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper
 
-Leamer, Ed. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
+Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 }
 \seealso{
 \code{\link{coef.sValues}} to extract coefficients or statistics;

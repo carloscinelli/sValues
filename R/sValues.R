@@ -1,11 +1,12 @@
 ##### User functions ####
 
-utils::globalVariables(c("variable"))
+utils::globalVariables(c("variable", "coefficients"))
 
 # New functions -----------------------------------------------------------
 # to be exported soon
 
 # Z/Chi s-values (to be added)
+##' @importFrom stats setNames coef
 zChi <- function(x){
   if(class(x) != "sValues") stop("Object must be of class 'sValues'")
   z   <- coef(x)[, "t_ols_all"]
@@ -51,14 +52,14 @@ g_s_values <- function(x, R2_bounds){
 ##' 
 ##' \item \code{simple}: a \code{list} with the results of the simple linear regressions for each variable.
 ##' 
-##' \item \code{all}: the results of the linear regregssion with all variables.
+##' \item \code{all}: the results of the linear regression with all variables.
 ##' 
 ##' \item \code{bayes}: a \code{list} with the results of the bayesian regression for each combination of the R2 bounds. 
 ##' Each bayesian regression includes the coefficient estimates, the variance-covariance matrix and the t-values.
 ##' 
-##' \item \code{ext_bounds} a \code{list} with the extreme bounds estimates for each combination of the R2 bounds.
+##' \item \code{ext_bounds}: a \code{list} with the extreme bounds estimates for each combination of the R2 bounds.
 ##' 
-##' \item \code{s_values} a \code{data.frame} with the s_values for each combination of the R2 bounds.
+##' \item \code{s_values}: a \code{data.frame} with the s_values for each combination of the R2 bounds.
 ##' }
 ##' 
 ##' @examples 
@@ -129,6 +130,7 @@ sValues.matrix <- function(m, ...){
 ##' @param df an object of class \code{\link{data.frame}} with the dependent variable as the first column followed by the covariates.
 ##' @export
 ##' @name sValues
+##' @importFrom stats as.formula
 sValues.data.frame <- function(df, ...){
   formula <- as.formula(paste(names(df)[1], "~ ."))
   res <- sValues(formula = formula, data = df, ...)
@@ -148,6 +150,7 @@ sValues.data.frame <- function(df, ...){
 ##' The default is \code{TRUE}. If your data is already scaled/standardized you should set this to \code{FALSE}.
 ##' @export
 ##' @name sValues
+##' @importFrom stats lm
 sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1), 
                     favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   
@@ -292,6 +295,7 @@ betas <- function(object){
 
 ##' @export
 ##' @name coef.sValues
+##' @importFrom stats coef
 t_values <- function(object){
   if(class(object) != "sValues") stop("Object must be of class 'sValues'")
   #simple
@@ -392,11 +396,14 @@ print.sValues <- function(x, ..., print.length = 6){
 
 ##' str sValues
 ##' 
+##' \code{str} method for \code{sValues}. 
+##' 
 ##' @param object an object of class \code{\link{sValues}}.
 ##' @param max.level maximal level of nesting which is 
 ##' applied for displaying nested structures. Default is 1.
 ##' @param ... further arguments passed to or from other methods.
 ##' @export
+##' @importFrom utils str
 str.sValues <- function(object, max.level = 1, ...){
   str(unclass(object), max.level = max.level, ...)
 }
@@ -471,6 +478,7 @@ plot.sValues <- function(x, type = "t_s_plot", ...){
 
 
 ##' @import ggplot2 reshape2
+##' @importFrom stats coef
 t_s_plot <- function(x, R2_bounds = NULL){
   data <- coef(x)
   if(!is.null(R2_bounds)){
@@ -500,6 +508,7 @@ t_s_plot <- function(x, R2_bounds = NULL){
 
 
 ##' @import ggplot2 reshape2
+##' @importFrom stats coef
 beta_plot <- function(x, variables = "all", error_bar = FALSE, ext_bounds_shades = FALSE){
   
   betas <- .melt.coef(x, "betas")

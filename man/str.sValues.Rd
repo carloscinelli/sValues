@@ -15,6 +15,6 @@ applied for displaying nested structures. Default is 1.}
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-str sValues
+\code{str} method for \code{sValues}.
 }
 
