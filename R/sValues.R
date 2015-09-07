@@ -454,6 +454,7 @@ summary.sValues <- function(object, ...){
 ##' \itemize{
 ##'     \item \code{variables}: a character vector specifying which variables to plot. Default is "all".
 ##'     \item \code{error_bar}: should the error bars be plotted? Default is \code{FALSE}.
+##'     \item \code{ext_bounds_shades}: should shades representing the extreme bounds be plotted? Default is \code{FALSE}.
 ##' }
 ##' 
 ##' @return 

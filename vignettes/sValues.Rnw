@@ -1,3 +1,4 @@
+%\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Brief Introduction to the sValues Package}
 \documentclass{article}
 
@@ -151,8 +152,9 @@ plot(eg, type = "t_s_plot", R2_bounds = c(0.5, 1))
 
 Also, let's investigate how the coefficient for Government GDP Share varies with different prior $R^2$ as shown in Figure \ref{fig:beta_plot} (the Bayesian estimates consider a diagonal $V$ with the corresponding $v^2$ specified before and can be thought of weighted averages of the $2^k$ regressions \cite{Leamer2014}).
 
-<<beta_plot, size='small', fig.align='center', fig.lp="fig:", fig.cap = 'Bayesian estimates for GOVNOM1'>>=
-plot(eg, type = "beta_plot", variables = "GOVNOM1")
+<<beta_plot, size='small', fig.align='center', fig.lp="fig:", fig.cap = 'Bayesian estimates for GOVNOM1, with error bars and extreme bounds (shaded areas).'>>=
+plot(eg, type = "beta_plot", variables = "GOVNOM1",
+     error_bar = TRUE, ext_bounds_shades = TRUE)
 @
 
 The \texttt{sValues} function allows you to define some of the variables as ``favorites'' with larger prior variances. In that case, you need to specify a \texttt{favorites} paramater - with the names of the favorite variables - and a \texttt{R2\_favorites} parameter with the $R^2$ bounds for the favorite variables. For example, the code below reproduces the favorite variables chosen in Leamer\cite{Leamer2014}:
