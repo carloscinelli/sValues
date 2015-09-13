@@ -1,6 +1,15 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in [1] and [2].
 
+CRAN
+----
+
+You can install the package from CRAN by running:
+
+``` r
+install.packages("sValues")
+```
+
 How to install the development version from GitHub
 --------------------------------------------------
 
@@ -10,11 +19,6 @@ To install the GitHub version you need to have the package `devtools` installed.
 # install.packages("devtools") # run this to install the devtools package
 devtools::install_github("carloscinelli/sValues", build_vignettes = TRUE)
 ```
-
-CRAN version
-------------
-
-The package will soon be on CRAN.
 
 Example usage
 -------------
@@ -46,7 +50,7 @@ plot(eg)
 #> want to change this, set the 'R2_bounds' parameter.
 ```
 
-![](README-unnamed-chunk-3-1.png)
+![](README-unnamed-chunk-4-1.png)
 
 As we can see from the results, only in the "optimistic"" scenario some variables are robust to model ambiguity. Moreover, if we look at the sample uncertainty (t-values), there is only one variable (`IPRICE1`) which has both \(|s| > 1\) and \(|t| > 2\). What the s-values are telling you is that any precise inferences about the sign of almost all the coefficients *require stronger prior information about preference for some variables*.
 

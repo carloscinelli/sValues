@@ -16,18 +16,23 @@ knitr::opts_chunk$set(
 
 The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in [1] and [2]. 
 
+## CRAN
+
+You can install the package from CRAN by running:
+
+```{r, eval = FALSE}
+install.packages("sValues")
+```
+
+
 ## How to install the development version from GitHub
 
-To install the GitHub version you need to have the package `devtools` installed. Make sure to set the option `build_vignettes = TRUE` to compile the package vignette.
+To install the GitHub version you need to have the package `devtools` installed. Make sure to set the option `build_vignettes = TRUE` to compile the package vignette. 
 
 ```{r, eval = FALSE}
 # install.packages("devtools") # run this to install the devtools package
 devtools::install_github("carloscinelli/sValues", build_vignettes = TRUE)
 ```
-
-## CRAN version
-
-The package will soon be on CRAN.
 
 ## Example usage
 The `sValues` package comes with an example dataset on economic growth. This dataset comprises the growth of real GDP per capita from 1960 to 1996 and other 67 explanatory variables from 87 countries. 
