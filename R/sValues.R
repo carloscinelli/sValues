@@ -185,7 +185,7 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
   
   
   #-- model matrix and scale data --#
-  new_df                 <- model_matrix_scale(formula, data, scale = scale)
+  new_df                 <- model_frame_scale(formula, data, scale = scale)
   
   #-- ols simple --#
   singles_formula        <- lapply(names(new_df)[-1],  function(i) formula(new_df[c(deparse(formula[[2]]),i)]))
