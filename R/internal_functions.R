@@ -1,13 +1,11 @@
 ##### Internal Functions  - Not for user interaction #####
 
 # scale data
-##' @importFrom stats model.matrix
-model_matrix_scale <- function(formula, data, scale = TRUE){
-  x <- model.matrix(formula, data)[ ,-1, drop = FALSE]
-  if(scale) x  <- scale(x)
-  y <- data[deparse(formula[[2]])]
-  if(scale) y <- scale(y) 
-  return(data.frame(y, x))
+##' @importFrom stats model.frame
+model_frame_scale <- function(formula, data, scale = TRUE){
+  new_df <- model.frame(formula, data)
+  if(scale) new_df  <- data.frame(scale(new_df))
+  return(new_df)
 }
 
 # Generates Prior Variance given favorites
