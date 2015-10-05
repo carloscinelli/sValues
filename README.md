@@ -1,4 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+/badges[/{grand-total}]/{sValues}[?color={blue}]
+
 The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in [1] and [2].
 
 CRAN
