@@ -6,6 +6,7 @@ output:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
 ![](http://cranlogs.r-pkg.org/badges/grand-total/sValues)
 
 ```{r, echo = FALSE}
