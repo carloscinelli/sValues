@@ -7,7 +7,8 @@
 \alias{sValues.matrix}
 \title{S-values: conventional model ambiguity measures}
 \usage{
-sValues(...)
+sValues(..., R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
+  R2_favorites = NULL, scale = TRUE)
 
 \method{sValues}{formula}(formula, data, R2_bounds = c(0.1, 0.5, 1),
   favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
@@ -19,12 +20,10 @@ sValues(...)
   favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
 }
 \arguments{
-\item{...}{arguments passed to other methods.}
-
-\item{formula}{an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted. Alternatively,
-you can also pass as first argument only a \code{matrix} or a \code{data.frame}, with the dependent variable as the first column followed by the covariates.}
-
-\item{data}{Needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis.}
+\item{...}{arguments passed to other methods. The first argument should be a \code{formula} followed by a \code{data.frame};
+alternatively, as a shortcut, you can omit the \code{formula} and provide only a \code{matrix} or
+a \code{data.frame}: in that case, the function will automatically consider the first column as the dependent variable
+and the rest as the independent variables.}
 
 \item{R2_bounds}{a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).}
@@ -37,12 +36,16 @@ These variables will have different lower and upper R2 bounds as defined in the 
 \item{scale}{should the variables be scaled/standardized to zero mean and unit variance?
 The default is \code{TRUE}. If your data is already scaled/standardized you should set this to \code{FALSE}.}
 
-\item{m}{instead of passing a formula you can pass an object of class \code{\link{matrix}} as the first argument.
-In that case, the dependent variable must be the first column, followed by the covariates.
+\item{formula}{an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted.}
+
+\item{data}{needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis.}
+
+\item{m}{instead of passing a formula as the first argument, you can pass an object of class \code{\link{matrix}}
+with the dependent variable in the first column followed by the covariates.
 The matrix must have column names.}
 
-\item{df}{instead of passing a formula you can pass an object of class \code{\link{data.frame}} as the first argument.
-In that case, the dependent variable must be the first column, followed by the covariates.}
+\item{df}{instead of passing a formula as the first argument, you can pass only an object of class \code{\link{data.frame}}
+with the dependent variable in the first column followed by the covariates.}
 }
 \value{
 \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:

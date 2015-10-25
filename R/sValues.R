@@ -34,6 +34,7 @@ g_s_values <- function(x, R2_bounds){
 # Main function - sValues -------------------------------------------------
 
 
+
 ##' S-values: conventional model ambiguity measures
 ##' 
 ##' @description 
@@ -41,8 +42,10 @@ g_s_values <- function(x, R2_bounds){
 ##' discussed in Leamer (2015). 
 ##' For further details see the package vignette. 
 ##'
-##' @param ... arguments passed to other methods.
-##'  
+##' @param ... arguments passed to other methods. The first argument should be a \code{formula} followed by a \code{data.frame};
+##' alternatively, as a shortcut, you can omit the \code{formula} and provide only a \code{matrix} or 
+##' a \code{data.frame}: in that case, the function will automatically consider the first column as the dependent variable 
+##' and the rest as the independent variables.
 ##' @return 
 ##' \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:
 ##' 
@@ -111,13 +114,13 @@ g_s_values <- function(x, R2_bounds){
 ##' 
 ##' @export
 ### sValues ###
-sValues <- function(...){
+sValues <- function(..., R2_bounds = c(0.1, 0.5, 1), 
+                    favorites = NULL, R2_favorites = NULL, scale = TRUE){
   UseMethod("sValues")
 }
 
-##' @param formula an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted. Alternatively, 
-##' you can also pass as first argument only a \code{matrix} or a \code{data.frame}, with the dependent variable as the first column followed by the covariates.
-##' @param data Needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis. 
+##' @param formula an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted. 
+##' @param data needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis. 
 ##' @param R2_bounds a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 ##'  \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).
 ##' @param favorites \emph{optional} - a character vector that specifies the "favorite" varibles to be used in the analysis.
@@ -203,9 +206,8 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
 
 
 
-
-##' @param m instead of passing a formula you can pass an object of class \code{\link{matrix}} as the first argument.
-##' In that case, the dependent variable must be the first column, followed by the covariates. 
+##' @param m instead of passing a formula as the first argument, you can pass an object of class \code{\link{matrix}}
+##' with the dependent variable in the first column followed by the covariates. 
 ##' The matrix must have column names.
 ##' @export
 ##' @name sValues
@@ -219,8 +221,8 @@ sValues.matrix <- function(m, R2_bounds = c(0.1, 0.5, 1),
   res
 }
 
-##' @param df instead of passing a formula you can pass an object of class \code{\link{data.frame}} as the first argument. 
-##' In that case, the dependent variable must be the first column, followed by the covariates.
+##' @param df instead of passing a formula as the first argument, you can pass only an object of class \code{\link{data.frame}} 
+##' with the dependent variable in the first column followed by the covariates.
 ##' @export
 ##' @name sValues
 ##' @importFrom stats as.formula
