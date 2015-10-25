@@ -11,13 +11,13 @@ sValues(..., R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
   R2_favorites = NULL, scale = TRUE)
 
 \method{sValues}{formula}(formula, data, R2_bounds = c(0.1, 0.5, 1),
-  favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
+  favorites = NULL, R2_favorites = NULL, scale = TRUE)
 
 \method{sValues}{matrix}(m, R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
-  R2_favorites = NULL, scale = TRUE, ...)
+  R2_favorites = NULL, scale = TRUE)
 
 \method{sValues}{data.frame}(df, R2_bounds = c(0.1, 0.5, 1),
-  favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
+  favorites = NULL, R2_favorites = NULL, scale = TRUE)
 }
 \arguments{
 \item{...}{arguments passed to other methods. The first argument should be a \code{formula} followed by a \code{data.frame};
@@ -40,12 +40,12 @@ The default is \code{TRUE}. If your data is already scaled/standardized you shou
 
 \item{data}{needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis.}
 
-\item{m}{instead of passing a formula as the first argument, you can pass an object of class \code{\link{matrix}}
-with the dependent variable in the first column followed by the covariates.
+\item{m}{an object of class \code{\link{matrix}} with the dependent variable in the first column
+followed by the covariates.
 The matrix must have column names.}
 
-\item{df}{instead of passing a formula as the first argument, you can pass only an object of class \code{\link{data.frame}}
-with the dependent variable in the first column followed by the covariates.}
+\item{df}{an object of class \code{\link{data.frame}} with the dependent variable in the first column
+followed by the covariates.}
 }
 \value{
 \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:

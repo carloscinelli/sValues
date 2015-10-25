@@ -132,7 +132,7 @@ sValues <- function(..., R2_bounds = c(0.1, 0.5, 1),
 ##' @name sValues
 ##' @importFrom stats lm
 sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1), 
-                            favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+                            favorites = NULL, R2_favorites = NULL, scale = TRUE){
   
   stopifnot(class(formula)=="formula",
             class(data) == "data.frame",
@@ -206,31 +206,31 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
 
 
 
-##' @param m instead of passing a formula as the first argument, you can pass an object of class \code{\link{matrix}}
-##' with the dependent variable in the first column followed by the covariates. 
+##' @param m an object of class \code{\link{matrix}} with the dependent variable in the first column 
+##' followed by the covariates. 
 ##' The matrix must have column names.
 ##' @export
 ##' @name sValues
 sValues.matrix <- function(m, R2_bounds = c(0.1, 0.5, 1), 
-                           favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+                           favorites = NULL, R2_favorites = NULL, scale = TRUE){
   if(!length(colnames(m)>0)) stop("Matrix must have column names!")
   df <- as.data.frame(m)
   res <- sValues(df, R2_bounds = R2_bounds, favorites = favorites, 
-                 R2_favorites = R2_favorites, scale = scale, ...)
+                 R2_favorites = R2_favorites, scale = scale)
   res$info$data <- deparse(substitute(m))
   res
 }
 
-##' @param df instead of passing a formula as the first argument, you can pass only an object of class \code{\link{data.frame}} 
-##' with the dependent variable in the first column followed by the covariates.
+##' @param df an object of class \code{\link{data.frame}} with the dependent variable in the first column 
+##' followed by the covariates.
 ##' @export
 ##' @name sValues
 ##' @importFrom stats as.formula
 sValues.data.frame <- function(df, R2_bounds = c(0.1, 0.5, 1), 
-                               favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+                               favorites = NULL, R2_favorites = NULL, scale = TRUE){
   formula <- as.formula(paste(names(df)[1], "~ ."))
   res <- sValues(formula = formula, data = df, R2_bounds = R2_bounds, 
-                 favorites = favorites, R2_favorites = R2_favorites, scale = scale, ...)
+                 favorites = favorites, R2_favorites = R2_favorites, scale = scale)
   res$info$data <- deparse(substitute(df))
   res
 }
