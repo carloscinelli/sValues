@@ -132,7 +132,7 @@ sValues <- function(..., R2_bounds = c(0.1, 0.5, 1),
 ##' @name sValues
 ##' @importFrom stats lm
 sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1), 
-                            favorites = NULL, R2_favorites = NULL, scale = TRUE){
+                            favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   
   stopifnot(class(formula)=="formula",
             class(data) == "data.frame",
@@ -212,7 +212,7 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
 ##' @export
 ##' @name sValues
 sValues.matrix <- function(m, R2_bounds = c(0.1, 0.5, 1), 
-                           favorites = NULL, R2_favorites = NULL, scale = TRUE){
+                           favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   if(!length(colnames(m)>0)) stop("Matrix must have column names!")
   df <- as.data.frame(m)
   res <- sValues(df, R2_bounds = R2_bounds, favorites = favorites, 
@@ -227,7 +227,7 @@ sValues.matrix <- function(m, R2_bounds = c(0.1, 0.5, 1),
 ##' @name sValues
 ##' @importFrom stats as.formula
 sValues.data.frame <- function(df, R2_bounds = c(0.1, 0.5, 1), 
-                               favorites = NULL, R2_favorites = NULL, scale = TRUE){
+                               favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   formula <- as.formula(paste(names(df)[1], "~ ."))
   res <- sValues(formula = formula, data = df, R2_bounds = R2_bounds, 
                  favorites = favorites, R2_favorites = R2_favorites, scale = scale)
