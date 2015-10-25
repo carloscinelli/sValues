@@ -9,24 +9,22 @@
 \usage{
 sValues(...)
 
-\method{sValues}{matrix}(m, ...)
-
-\method{sValues}{data.frame}(df, ...)
-
 \method{sValues}{formula}(formula, data, R2_bounds = c(0.1, 0.5, 1),
+  favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
+
+\method{sValues}{matrix}(m, R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
+  R2_favorites = NULL, scale = TRUE, ...)
+
+\method{sValues}{data.frame}(df, R2_bounds = c(0.1, 0.5, 1),
   favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
 }
 \arguments{
 \item{...}{arguments passed to other methods.}
 
-\item{m}{an object of class \code{\link{matrix}} with the dependent variable as the first column followed by the covariates.
-The matrix must have column names.}
+\item{formula}{an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted. Alternatively,
+you can also pass as first argument only a \code{matrix} or a \code{data.frame}, with the dependent variable as the first column followed by the covariates.}
 
-\item{df}{an object of class \code{\link{data.frame}} with the dependent variable as the first column followed by the covariates.}
-
-\item{formula}{an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted.}
-
-\item{data}{Needed when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis.}
+\item{data}{Needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis.}
 
 \item{R2_bounds}{a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).}
@@ -38,6 +36,13 @@ These variables will have different lower and upper R2 bounds as defined in the 
 
 \item{scale}{should the variables be scaled/standardized to zero mean and unit variance?
 The default is \code{TRUE}. If your data is already scaled/standardized you should set this to \code{FALSE}.}
+
+\item{m}{instead of passing a formula you can pass an object of class \code{\link{matrix}} as the first argument.
+In that case, the dependent variable must be the first column, followed by the covariates.
+The matrix must have column names.}
+
+\item{df}{instead of passing a formula you can pass an object of class \code{\link{data.frame}} as the first argument.
+In that case, the dependent variable must be the first column, followed by the covariates.}
 }
 \value{
 \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:
