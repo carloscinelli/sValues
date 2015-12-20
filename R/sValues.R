@@ -401,7 +401,7 @@ print.sValues <- function(x, ..., print.length = 6){
               "None"
               }, "\n")
     }
-    cat("  Unconstrained OLS:", e[[length(e)]] , "\n")
+    cat("  Unconstrained OLS:", text_break(e[[length(e)]],print.length = print.length), "\n")
   })
 }
 
