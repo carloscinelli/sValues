@@ -1,3 +1,4 @@
+library(testthat)
 library(sValues)
 context("Growth Regressions Example")
 
@@ -127,5 +128,14 @@ test_that("favorites among all",
 test_that("Factors", {
   data("mtcars")
   mtcars$cyl <- factor(mtcars$cyl)
-  sValues(mtcars)
+  sValues(mtcars) # this should not throw an error
+  
+  data("economic_growth")
+  e1 <- sValues(economic_growth)
+  s1 <- s_values(e1)
+  economic_growth$BRIT <- as.factor(economic_growth$BRIT)
+  e2 <- sValues(economic_growth)
+  s2 <- s_values(e2)
+  row.names(s2) <- row.names(s1)
+  expect_equal(s1, s2)
 })
