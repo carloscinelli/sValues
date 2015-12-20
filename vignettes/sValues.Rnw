@@ -3,8 +3,9 @@
 \documentclass{article}
 
 \title{Model Ambiguity in \texttt{R}: The \texttt{sValues} Package} 
+\date{October 25, 2015}
 
-\author{Carlos Cinelli \thanks{This vignette is a draft based on a poster presented on useR! 2015. I've learned a great deal from discussions with Ed Leamer! I also thank Rasmus Baath, Danilo Freire and Douglas Araujo for their comments. Of course, all remaining errors are my own. And all opinions expressed in this material are mine and do not necessarily reflect the views of UnB or CBB. 
+\author{Carlos Cinelli \thanks{This vignette is a draft based on a poster presented on useR! 2015. I've learned a great deal from discussions with Ed Leamer! I also thank Rasmus Baath, Danilo Freire and Douglas Araujo for their comments. Of course, all remaining errors are my own. And all opinions expressed in this material are mine and do not necessarily reflect the views of CBB. 
 Contact: carloscinelli@hotmail.com}}
 
 \begin{document}
