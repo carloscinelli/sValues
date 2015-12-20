@@ -123,3 +123,9 @@ test_that("favorites among all",
             expect_equal(coefs, coefs_test)
           }
 )
+
+test_that("Factors", {
+  data("mtcars")
+  mtcars$cyl <- factor(mtcars$cyl)
+  sValues(mtcars)
+})
