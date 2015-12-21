@@ -1,7 +1,7 @@
 ##### Internal Functions  - Not for user interaction #####
 
 # scale data
-##' @importFrom stats model.frame
+##' @importFrom stats model.matrix
 model_frame_scale <- function(formula, data, scale = TRUE){
   x <- model.matrix(formula, data)[ ,-1, drop = FALSE]
   if(scale) x  <- scale(x)
