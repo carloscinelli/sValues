@@ -1,3 +1,5 @@
+Fixed note
+
 ## Test Environments
 * local OS X install
 * win-builder (devel)
