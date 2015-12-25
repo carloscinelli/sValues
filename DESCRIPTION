@@ -4,7 +4,7 @@ Title: Measures of the Sturdiness of Regression Coefficients
 Version: 0.1.4.9000
 Author: Carlos Cinelli
 Maintainer: Carlos Cinelli <carloscinelli@hotmail.com>
-Description: The sValues package implements the s-values proposed by Ed. Leamer.
+Description: Implements the s-values proposed by Ed. Leamer.
     It provides a context-minimal approach for sensitivity analysis using extreme
     bounds to assess the sturdiness of regression coefficients.
 Imports:
