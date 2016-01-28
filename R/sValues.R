@@ -341,8 +341,9 @@ extreme_bounds <- function(object){
 
 
 
-##' Succinct display of S-values results.
+##' @title Succinct display of S-values results.
 ##'  
+##' @description 
 ##' Succinct display of S-values results.
 ##' 
 ##' @param x an object of class \code{\link{sValues}}.
@@ -350,7 +351,7 @@ extreme_bounds <- function(object){
 ##' @param print.length how many variables to show in the screen?
 ##' This is used for pretty printing. The default is 6.
 ##' 
-##'  @return 
+##' @return 
 ##'  \code{NULL}
 ##'  
 ##' @examples 

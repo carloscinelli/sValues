@@ -2,9 +2,7 @@
 % Please edit documentation in R/sValues.R
 \name{print.sValues}
 \alias{print.sValues}
-\title{Succinct display of S-values results.
- 
-Succinct display of S-values results.}
+\title{Succinct display of S-values results.}
 \usage{
 \method{print}{sValues}(x, ..., print.length = 6)
 }
@@ -14,14 +12,12 @@ Succinct display of S-values results.}
 \item{...}{further arguments passed to or from other methods.}
 
 \item{print.length}{how many variables to show in the screen?
-This is used for pretty printing. The default is 6.
-
- @return 
- \code{NULL}}
+This is used for pretty printing. The default is 6.}
+}
+\value{
+\code{NULL}
 }
 \description{
-Succinct display of S-values results.
- 
 Succinct display of S-values results.
 }
 \examples{
