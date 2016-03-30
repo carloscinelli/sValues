@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/carloscinelli/sValues.svg?branch=master)](https://travis-ci.org/carloscinelli/sValues) [![Coverage Status](https://img.shields.io/codecov/c/github/carloscinelli/sValues/master.svg)](https://codecov.io/github/carloscinelli/sValues?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/sValues)](https://cran.r-project.org/web/packages/sValues/) ![](http://cranlogs.r-pkg.org/badges/sValues)
 
-The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in [1] and [2].
+The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in \[1\] and \[2\].
 
 CRAN
 ----
@@ -61,6 +61,6 @@ More information can be found on the help documentation, examples and package vi
 References
 ----------
 
-[[1] Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Working Paper](http://www.anderson.ucla.edu/faculty/edward.leamer/documents/Leamer_on_Conventional_Measures_of_Model_Ambiguity.pdf)
+[\[1\] Leamer, E. (2016). S-values: Conventional context-minimal measures of the sturdiness of regression coefficients. Journal of Econometrics](http://www.sciencedirect.com/science/article/pii/S0304407616300185)
 
-[[2] Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.](http://www.sciencedirect.com/science/article/pii/S0014292115000641)
+[\[2\] Leamer, E. (2016). S-values and bayesian weighted all-subsets regressions. European Economic Review.](http://www.sciencedirect.com/science/article/pii/S0014292115000641)
