@@ -12,7 +12,11 @@ install:
 
 # Adapt as necessary starting from here
 
-matrix:
+environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1
+
+  matrix:
   - R_VERSION: devel
     GCC_PATH: mingw_32
 
@@ -28,7 +32,7 @@ matrix:
   - R_VERSION: patched
 
   - R_VERSION: oldrel
-  
+
 build_script:
   - travis-tool.sh install_deps
 
