@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/carloscinelli/sValues.svg?branch=master)](https://travis-ci.org/carloscinelli/sValues) [![Coverage Status](https://img.shields.io/codecov/c/github/carloscinelli/sValues/master.svg)](https://codecov.io/github/carloscinelli/sValues?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/sValues)](https://cran.r-project.org/web/packages/sValues/) ![](http://cranlogs.r-pkg.org/badges/sValues)
+[![Travis-CI Build Status](https://travis-ci.org/carloscinelli/sValues.svg?branch=master)](https://travis-ci.org/carloscinelli/sValues) [![Build status](https://ci.appveyor.com/api/projects/status/cplf2u9uxgmapk0n/branch/master?svg=true)](https://ci.appveyor.com/project/carloscinelli/svalues/branch/master) [![Coverage Status](https://img.shields.io/codecov/c/github/carloscinelli/sValues/master.svg)](https://codecov.io/github/carloscinelli/sValues?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/sValues)](https://cran.r-project.org/web/packages/sValues/) ![](http://cranlogs.r-pkg.org/badges/sValues)
 
 The `sValues` package implements the measures of the sturdiness of regression coefficients (s-values) proposed and discussed by Ed. Leamer in \[1\] and \[2\].
 
@@ -27,7 +27,7 @@ Example usage
 
 The `sValues` package comes with an example dataset on economic growth. This dataset comprises the growth of real GDP per capita from 1960 to 1996 and other 67 explanatory variables from 87 countries.
 
-The main function of the package is the `sValues` function. The standard approach is to provide a `formula` specifying the model, a `data.frame` with the data and a numerical vector with the \(R^2\) bounds (default values are \(0.1\), \(0.5\), and \(1\)). As a shortcut, you can omit the formula and the function will automatically consider the first column as the dependent variable and the rest as the independent variables. Let's run the analysis for the economic growth data.
+The main function of the package is the `sValues` function. The standard approach is to provide a `formula` specifying the model, a `data.frame` with the data and a numerical vector with the *R*<sup>2</sup> bounds (default values are 0.1, 0.5, and 1). As a shortcut, you can omit the formula and the function will automatically consider the first column as the dependent variable and the rest as the independent variables. Let's run the analysis for the economic growth data.
 
 ``` r
 library(sValues) # loads package
@@ -52,9 +52,9 @@ plot(eg)
 #> want to change this, set the 'R2_bounds' parameter.
 ```
 
-![](README-unnamed-chunk-4-1.png)
+![](tools/unnamed-chunk-4-1.png)
 
-As we can see from the results, only in the "optimistic"" scenario some variables are robust to model ambiguity. Moreover, if we look at the sample uncertainty (t-values), there is only one variable (`IPRICE1`) which has both \(|s| > 1\) and \(|t| > 2\). What the s-values are telling you is that any precise inferences about the sign of almost all the coefficients *require stronger prior information about preference for some variables*.
+As we can see from the results, only in the "optimistic"" scenario some variables are robust to model ambiguity. Moreover, if we look at the sample uncertainty (t-values), there is only one variable (`IPRICE1`) which has both |*s*|&gt;1 and |*t*|&gt;2. What the s-values are telling you is that any precise inferences about the sign of almost all the coefficients *require stronger prior information about preference for some variables*.
 
 More information can be found on the help documentation, examples and package vignette.
 
