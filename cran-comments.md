@@ -1,8 +1,12 @@
 Fixed note
 
 ## Test Environments
+* r-hub
+* win-builder
+* travis
+* appveyor
 * local OS X install
-* win-builder (devel)
+
 
 ## R CMD check results
 OK
