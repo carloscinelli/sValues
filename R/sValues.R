@@ -528,10 +528,10 @@ beta_plot <- function(x, variables = "all", error_bar = FALSE, ext_bounds_shades
   betas <- .melt.coef(x, "betas")
   
   t_values <- .melt.coef(x, "t_values")
+  t_values <- t_values["t_values"]
   
-  ext_bounds <-coef(x, "extreme_bounds")
-  ext_bounds$coefficients <- row.names(ext_bounds)
-  ext_bounds<- do.call("rbind", replicate(ncol(coef(x, "betas")), ext_bounds, simplify = FALSE))
+  ext_bounds <- coef(x, "extreme_bounds")
+  ext_bounds <- do.call("rbind", replicate(ncol(coef(x, "betas")), ext_bounds, simplify = FALSE))
   
   melted <- cbind(betas, t_values, ext_bounds)
   
@@ -541,7 +541,7 @@ beta_plot <- function(x, variables = "all", error_bar = FALSE, ext_bounds_shades
   }
   
   p <- ggplot(melted, aes(variable, betas, group=coefficients)) + 
-    geom_line(aes(variable, betas, group=coefficients), col = "transparent")
+    geom_line(aes(variable, betas, group = coefficients), col = "transparent")
   
   if(ext_bounds_shades){
     names <- grep("^R2", names(melted), value = TRUE)
