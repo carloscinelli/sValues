@@ -18,4 +18,4 @@ Suggests:
 VignetteBuilder: knitr
 LazyData: true
 BugReports: https://github.com/carloscinelli/sValues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

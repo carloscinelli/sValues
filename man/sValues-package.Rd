@@ -23,4 +23,3 @@ Leamer, E. (2014). S-values: Conventional context-minimal measures of the sturdi
 
 Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 }
-

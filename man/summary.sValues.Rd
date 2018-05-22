@@ -14,4 +14,3 @@
 \description{
 For now, this function is equivalent to \code{\link{print.sValues}}.
 }
-

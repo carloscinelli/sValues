@@ -3,7 +3,9 @@
 \docType{data}
 \name{economic_growth}
 \alias{economic_growth}
+\alias{economic_growth}
 \alias{economic_growth_original}
+\alias{economic_growth}
 \alias{economic_growth_sala_i_martin}
 \title{Economic Growth data}
 \format{An object of class \code{data.frame} with 87 rows and 68 columns.}
@@ -20,4 +22,3 @@ Leamer's (87 countries)
 Original (139 countries)
 }
 \keyword{datasets}
-

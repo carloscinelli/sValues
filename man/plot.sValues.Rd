@@ -13,7 +13,7 @@
 a scatterplot of s-values vs t-values for all coefficients and \emph{beta_plot} which returns
 a plot of the different estimates for the coefficients.}
 
-\item{...}{aditional arguments to be passed to the plot functions. See details.}
+\item{...}{additional arguments to be passed to the plot functions. See details.}
 }
 \value{
 It returns a \code{\link{ggplot}} object with the requested plot.
@@ -22,7 +22,7 @@ It returns a \code{\link{ggplot}} object with the requested plot.
 Plot methods for objects of the class \code{\link{sValues}}.
 }
 \details{
-Addional arguments:
+Additional arguments:
 
 \code{t_s_plot} 
 \itemize{
@@ -46,4 +46,3 @@ plot(eg_sv, type = "beta_plot", variable = "OPENDEC1", error_bar = FALSE)
 plot(eg_sv, type = "beta_plot", variable = "OPENDEC1", error_bar = TRUE)
 
 }
-

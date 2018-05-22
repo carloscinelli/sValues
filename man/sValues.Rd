@@ -2,9 +2,12 @@
 % Please edit documentation in R/sValues.R
 \name{sValues}
 \alias{sValues}
-\alias{sValues.data.frame}
+\alias{sValues}
 \alias{sValues.formula}
+\alias{sValues}
 \alias{sValues.matrix}
+\alias{sValues}
+\alias{sValues.data.frame}
 \title{S-values: conventional model ambiguity measures}
 \usage{
 sValues(..., R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
@@ -28,7 +31,7 @@ and the rest as the independent variables.}
 \item{R2_bounds}{a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).}
 
-\item{favorites}{\emph{optional} - a character vector that specifies the "favorite" varibles to be used in the analysis.
+\item{favorites}{\emph{optional} - a character vector that specifies the "favorite" variables to be used in the analysis.
 These variables will have different lower and upper R2 bounds as defined in the \code{R_favorites} argument.}
 
 \item{R2_favorites}{\emph{optional} - a numeric vector with two or more R2 bounds for the "favorite" variables.}
@@ -51,7 +54,7 @@ followed by the covariates.}
 \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:
 
 \itemize{ 
-\item \code{info}: a \code{list} with the general information about the paramaters used in the analysis, such as the 
+\item \code{info}: a \code{list} with the general information about the parameters used in the analysis, such as the 
 formula, the data, the bounds and favorite variables.
 
 \item \code{simple}: a \code{list} with the results of the simple linear regressions for each variable.
@@ -118,4 +121,3 @@ Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. Europ
 
 \code{\link{plot.sValues}} for plots.
 }
-

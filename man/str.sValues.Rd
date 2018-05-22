@@ -17,4 +17,3 @@ applied for displaying nested structures. Default is 1.}
 \description{
 \code{str} method for \code{sValues}.
 }
-
