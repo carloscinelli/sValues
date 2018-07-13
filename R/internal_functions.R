@@ -36,9 +36,31 @@ model_frame_scale <- function(formula, data, scale = TRUE){
   (max +  min) / (max -  min)
 }
 
+# code originally from caTools, but caTools package is being retired by CRAN
+combs <- function(v, k) 
+{
+  n = length(v)
+  if (n == k) 
+    P = matrix(v, 1, n)
+  else if (k == 1) 
+    P = matrix(v, n, 1)
+  else if (k == n - 1) 
+    P = matrix(rep(v, each = n - 1), n, n - 1)
+  else if (k < n) {
+    P = matrix(0, 0, k)
+    if (k < n & k > 1) {
+      for (i in 1:(n - k + 1)) {
+        Q = combs(v[(i + 1):n], k - 1)
+        j = nrow(Q)
+        P = rbind(P, cbind(rep(v[i], j), Q))
+      }
+    }
+  }
+  else stop("combs: number m has to be smaller or equal to length of vector v")
+  return(P)
+}
 
-
-##' @import caTools
+#
 r2_combs <- function(R2_bounds){
   r2_combs  <- as.data.frame(t(combs(R2_bounds, 2)))
   ord       <- order(t(r2_combs)[,1, drop = FALSE], -order(t(r2_combs)[,2, drop = FALSE]))
