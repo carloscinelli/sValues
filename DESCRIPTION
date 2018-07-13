@@ -1,7 +1,7 @@
 Package: sValues
 Type: Package
 Title: Measures of the Sturdiness of Regression Coefficients
-Version: 0.1.5
+Version: 0.1.6.9
 Author: Carlos Cinelli
 Maintainer: Carlos Cinelli <carloscinelli@hotmail.com>
 Description: Implements the s-values proposed by Ed. Leamer.
